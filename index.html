@@ -292,13 +292,12 @@
         }
     }
     
-    /* 用户和时间并排布局 - 修复高度不一致问题 */
+    /* 用户和时间并排布局 */
     .user-time-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 15px;
         margin-bottom: 10px;
-        align-items: stretch; /* 添加这个以确保子项高度一致 */
     }
     
     @media (max-width: 767px) {
@@ -308,39 +307,53 @@
         }
     }
     
-    /* 修复：统一用户框和时间框的高度和内边距 */
-    .user-display-box, .time-display-box {
-        padding: 10px;
+    /* 修复：只修改Current User框（蓝色框） */
+    .user-display-box {
+        padding: 6px; /* 减少内边距 */
         border-radius: 8px;
         font-size: 1.1rem;
         text-align: center;
         font-weight: 600;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
         border: 2px solid transparent;
-        min-height: 0; /* 移除最小高度限制 */
-        height: auto; /* 让内容决定高度 */
+        min-height: 0; /* 移除最小高度 */
     }
     
     .user-display-box.current-user {
         background: rgba(102, 126, 234, 0.1);
         border-color: #667eea;
         color: #333;
-        padding: 10px; /* 统一内边距 */
+        padding: 8px; /* 进一步减少内边距，与绿色框匹配 */
     }
     
     /* Current User显示为一行 */
     .current-user .user-value {
-        font-size: 1.1rem;
+        font-size: 1.1rem; /* 保持字体大小 */
         font-weight: 700;
-        line-height: 1.2; /* 调整行高以更好地垂直居中 */
+        margin-bottom: 0; /* 移除下边距 */
+        line-height: 1.2; /* 减小行高 */
         padding: 2px 0; /* 减少上下内边距 */
     }
     
     .current-user .user-label {
         display: none; /* 隐藏"Current User"标签 */
+    }
+    
+    /* 绿色倒计时框保持不变 */
+    .time-display-box {
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        text-align: center;
+        font-weight: 600;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px solid transparent;
     }
     
     .time-display-box.future {
@@ -357,13 +370,11 @@
         font-size: 1.3rem;
         font-weight: 700;
         margin-bottom: 2px;
-        line-height: 1.2; /* 统一行高 */
     }
     
     .time-label, .user-label {
         font-size: 0.75rem;
         opacity: 0.9;
-        line-height: 1.2;
     }
     
     .time-negative {
